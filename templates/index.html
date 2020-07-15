@@ -17,7 +17,7 @@
     {{  range .todos }}
         <li>
             <form method="POST" action="/delete/{{.ID}}">
-                {{.ID}} : {{ .Text }} : {{ if .IsDone }} 完了 {{else}} 未完了 {{end}}}[<a href="/{{.ID}}">編集</a>]
+                {{.ID}} : {{ .Text }} : {{ if .IsDone }} 完了 {{else}} 未完了 {{end}}[<a href="/{{.ID}}">編集</a>]
                 <input type="submit" value="削除">
             </form>
 

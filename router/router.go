@@ -23,6 +23,7 @@ func Router() {
 	router.GET("/:id", handler.Edit)
 	router.POST("/update/:id", handler.Update)
 	router.POST("/delete/:id", handler.Delete)
+	router.POST("/done/:id", handler.IsDone)
 
 	router.Run()
 }

@@ -45,13 +45,17 @@ func (handler *TodoHandler) Update(c *gin.Context) {
 }
 
 // タスク更新
-func (handler *TodoHandler) IdDone(c *gin.Context) {
+func (handler *TodoHandler) IsDone(c *gin.Context) {
 	todo := model.Todo{}
 	id := c.Param("id")
 	handler.Db.First(&todo, id)
-	isDone := c.GetBool("isDone")
-	todo.IsDone = isDone
-	c.Redirect(http.StatusMovedPermanently, "/")
+	if todo.IsDone {
+		todo.IsDone = false
+	} else {
+		todo.IsDone = true
+	}
+	handler.Db.Save(&todo)
+	c.Redirect(http.StatusMovedPermanently, "/"+id)
 }
 
 // 削除
