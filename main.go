@@ -1,24 +1,15 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
-	db "todo-go/gorm"
-	"todo-go/model"
+	"todo-go/db"
+	"todo-go/router"
 )
 
 func main() {
 
-	r := gin.Default()
-	r.GET("/index", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "こんにちは",
-		})
-	})
-
-	r.Run()
-
-	db := db.ConnectGorm()
+	// DB接続
+	db.Init()
 	defer db.Close()
-	db.AutoMigrate(&model.Todo{})
+
+	router.Router()
 }
